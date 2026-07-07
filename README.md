@@ -89,7 +89,7 @@ confirmation, and env-only credentials.
 
 Because the build ran through the API, it could do things a point-and-click
 workflow can't easily do — most notably, it **verified all 23 App-ID references
-against the tenant's ~10,800 predefined applications live** before any write, so
+against the tenant's predefined applications live** before any write, so
 an invalid or renamed name aborts the build instead of silently half-applying
 (this is how `openvpn`, `ipsec-base`, and `quic` were caught and corrected to
 their real App-IDs). Every object is created strictly in snippet scope with **no

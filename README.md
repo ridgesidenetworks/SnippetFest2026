@@ -78,23 +78,7 @@ counterpart control: hardening and detection, not another allow rule.
    visibility-vs-performance tradeoff, and tunable.
 
 
-## Engineering notes (how it was built)
 
-The entire snippet was built programmatically by a **coding agent driving the SCM
-API** — no clicking through the UI. The agent worked against the platform through
-the community Python SDK (`pan-scm-sdk`, `ScmClient`) over the REST API, and
-authored an idempotent, re-runnable build tool along the way: dry-run by default
-(validates and prints every payload with no writes), apply on explicit
-confirmation, and env-only credentials.
-
-Because the build ran through the API, it could do things a point-and-click
-workflow can't easily do — most notably, it **verified all 23 App-ID references
-against the tenant's predefined applications live** before any write, so
-an invalid or renamed name aborts the build instead of silently half-applying
-(this is how `openvpn`, `ipsec-base`, and `quic` were caught and corrected to
-their real App-IDs). Every object is created strictly in snippet scope with **no
-folder or device association** and nothing committed to a running configuration —
-the result is a clean, shareable artifact produced entirely from code.
 
 ---
 
